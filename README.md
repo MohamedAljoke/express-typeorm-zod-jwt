@@ -1,6 +1,7 @@
 # BackEnd
 
-This is the server-side API
+```npm install```
+```npm run dev```
 
 ## Overview
 
