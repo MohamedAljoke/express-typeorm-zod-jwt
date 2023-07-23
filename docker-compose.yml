@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  database_express_mysql:
+    hostname: database_express_mysql
+    container_name: database_mext_mysql
+    image: mysql:8.0
+    restart: always
+    env_file:
+      - .env
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DB_NAME}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - ${MYSQL_PORT}:${MYSQL_PORT}
+    expose:
+      - ${MYSQL_PORT}
+    volumes:
+      - my-db:/var/lib/mysql
+    networks:
+      - my-network
+
+volumes:
+  my-db:
+    driver: local
+networks:
+  my-network:
+    driver: bridge

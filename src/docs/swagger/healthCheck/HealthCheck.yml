@@ -1,0 +1,9 @@
+/api/v1/healthcheck:
+  get: 
+    summary: 'healthcheck'
+    tags:
+    - HealthCheck
+    description: Route to check if api is on
+    responses:
+      200:
+        description: Success
