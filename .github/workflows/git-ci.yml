@@ -1,4 +1,4 @@
-name: Mext server CI
+name: express server CI
 on:
   push:
     branches: [master]
@@ -7,7 +7,7 @@ on:
 env:
   MYSQL_USER: myuser
   MYSQL_PASSWORD: mypassword
-  MYSQL_DB_NAME: mext
+  MYSQL_DB_NAME: express
   MYSQL_HOST: localhost
   MYSQL_PORT: 3306
   DB_CONNECTION: mysql
