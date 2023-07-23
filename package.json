@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/main.ts  | pino-pretty"
+    "dev": "ts-node-dev --respawn --transpile-only src/main.ts  | pino-pretty",
+    "build":"tsc",
+    "start": "node dist/src/main.js"
   },
   "keywords": [],
   "author": "",
