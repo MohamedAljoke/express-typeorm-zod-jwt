@@ -1,0 +1,36 @@
+# .gitlab-ci.yml
+image: node:14.5.0-alpine
+
+variables:
+  MYSQL_USER: myuser
+  MYSQL_PASSWORD: mypassword
+  MYSQL_DB_NAME: express
+  MYSQL_HOST: mysql-master
+  MYSQL_PORT: 3306
+  DB_CONNECTION: mysql
+
+services:
+  - name: mysql:5.7
+    alias: mysql-master
+    entrypoint: ["docker-entrypoint.sh", "mysqld", "--skip-character-set-client-handshake"]
+    variables:
+      MYSQL_DATABASE: $MYSQL_DB_NAME
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+      MYSQL_ROOT_PASSWORD: $MYSQL_PASSWORD
+
+before_script:
+  - apk add --no-cache mysql-client
+  - until mysql -h mysql-master -P 3306 -u $MYSQL_USER -p$MYSQL_PASSWORD -e "SELECT 1"; do sleep 5; done
+
+stages:
+  - build
+
+express-server:
+  stage: build
+  script:
+    - npm install
+    # Uncomment the following lines if you want to run migrations and tests
+    # - node ace migration:run
+    # - npm run test
+    - npm run build
